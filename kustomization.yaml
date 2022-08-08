@@ -1,0 +1,51 @@
+---
+# task: a helm chart and kustomize
+#
+# steps:
+# 1. download kustomize and helm e.g. on MacOS and brew: `brew install kustomize helm`
+# 2. start kustomize with helm `kustomize build --enable-helm`
+# 3. Check output
+#
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+# set some labels, e.g. to overwrite the helm
+commonLabels:
+  app.kubernetes.io/managed-by: Helm-Kustomize
+  usage: play-with-kustomize-helm
+  version: 1.0.0
+
+# set namespace for all resources
+namespace: dev
+
+# overwrite default helmchart value settings
+helmCharts:
+- name: wordpress
+  repo: https://charts.bitnami.com/bitnami
+  releaseName: site
+  valuesInline:
+    ingress:
+      hostname: wordpress.127.0.0.1.sslip.io
+      enabled: true
+    service:
+      type: ClusterIP
+
+# use to delete secrets
+patchesStrategicMerge:
+- |-
+  $patch: delete
+  apiVersion: v1
+  kind: Secret
+  metadata:
+    name: site-wordpress
+- |-
+  $patch: delete
+  apiVersion: v1
+  kind: Secret
+  metadata:
+    name: site-mariadb
+
+# objects
+resources:
+- external-secrets.yaml
+- namespace.yaml
