@@ -4,7 +4,7 @@ The example shows the interaction between kustomize and helm.
 
 It shows how resource without modifining the HelmChart, Kubernetes resources can be changed, added and deleted with the help of kustomize.
 
-Here, using the Bitnami Wordpress HelmChart, delete the pre-templated Kubernetes Secrets and and it back with the help of the External-Secrets in Kubernetes.
+Here, using the Bitnami Wordpress HelmChart, delete the pre-templated Kubernetes Secrets and add it back with the help of the External-Secrets in Kubernetes.
 
 ## Steps
 
@@ -77,7 +77,7 @@ Here, using the Bitnami Wordpress HelmChart, delete the pre-templated Kubernetes
     <https://github.com/kubernetes-sigs/kustomize/blob/master/examples/inlinePatch.md>
 - Kustomize and Helm usage
     <https://github.com/kubernetes-sigs/kustomize/blob/master/examples/chart.md>
-- Bitname HelmChart for Wordpress
+- Bitnami HelmChart for Wordpress
     <https://github.com/bitnami/charts/tree/master/bitnami/wordpress>
 - External-Secrets-Operator
     <https://external-secrets.io/>
